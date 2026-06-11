@@ -1,0 +1,110 @@
+<button
+    class="units-control__button button"
+    [class.is-active]="isOpen"
+    (click)="toggleDropdown()"
+    aria-haspopup="listbox"
+    [attr.aria-expanded]="isOpen"
+    aria-label="Toggle units configuration menu"
+>
+    <svg width="16" height="16" aria-hidden="true">
+        <use href="images/icons.svg#icon-units"></use>
+    </svg>
+    <span>Units</span>
+    <svg width="13" height="8" aria-hidden="true">
+        <use href="images/icons.svg#icon-dropdown"></use>
+    </svg>
+</button>
+
+<div class="units-control__dropdown" [class.is-active]="isOpen">
+    <button class="units-toggle button" (click)="toggleUnits()">{{ toggleButtonText }}</button>
+
+    <fieldset class="unit-group">
+        <legend class="unit-group__label">Temperature</legend>
+        <label class="unit-option" [class.is-selected]="selectedTemp === TemperatureUnit.Celsius">
+            <input
+                class="sr-only"
+                type="radio"
+                name="temperature"
+                [value]="TemperatureUnit.Celsius"
+                [(ngModel)]="selectedTemp"
+            />
+            <span>Celsius (&deg;C)</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+        <label class="unit-option" [class.is-selected]="selectedTemp === TemperatureUnit.Fahrenheit">
+            <input
+                class="sr-only"
+                type="radio"
+                name="temperature"
+                [value]="TemperatureUnit.Fahrenheit"
+                [(ngModel)]="selectedTemp"
+            />
+            <span>Fahrenheit (&deg;F)</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+    </fieldset>
+
+    <fieldset class="unit-group">
+        <legend class="unit-group__label">Wind Speed</legend>
+        <label class="unit-option" [class.is-selected]="selectedWindSpeed === WindSpeedUnit.KmH">
+            <input
+                class="sr-only"
+                type="radio"
+                name="wind-speed"
+                [value]="WindSpeedUnit.KmH"
+                [(ngModel)]="selectedWindSpeed"
+            />
+            <span>km/h</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+        <label class="unit-option" [class.is-selected]="selectedWindSpeed === WindSpeedUnit.Mph">
+            <input
+                class="sr-only"
+                type="radio"
+                name="wind-speed"
+                [value]="WindSpeedUnit.Mph"
+                [(ngModel)]="selectedWindSpeed"
+            />
+            <span>mph</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+    </fieldset>
+
+    <fieldset class="unit-group">
+        <legend class="unit-group__label">Precipitation</legend>
+        <label class="unit-option" [class.is-selected]="selectedPrecipitation === PrecipitationUnit.Millimeters">
+            <input
+                class="sr-only"
+                type="radio"
+                name="precipitation"
+                [value]="PrecipitationUnit.Millimeters"
+                [(ngModel)]="selectedPrecipitation"
+            />
+            <span>Millimeters (mm)</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+        <label class="unit-option" [class.is-selected]="selectedPrecipitation === PrecipitationUnit.Inches">
+            <input
+                class="sr-only"
+                type="radio"
+                name="precipitation"
+                [value]="PrecipitationUnit.Inches"
+                [(ngModel)]="selectedPrecipitation"
+            />
+            <span>Inches (in)</span>
+            <svg width="14" height="11" aria-hidden="true">
+                <use href="images/icons.svg#icon-checkmark"></use>
+            </svg>
+        </label>
+    </fieldset>
+</div>

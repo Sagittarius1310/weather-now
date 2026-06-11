@@ -1,6 +1,35 @@
 @use 'normalize';
 @use 'reset';
 
+@use 'variables' as vars;
+
 body {
     background-color: #02012B;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.button {
+    border: none;
+    border-radius: vars.$border-radius;
+    cursor: pointer;
+}
+
+input[type="text"],
+.button {
+    &:focus,
+    &:hover {
+        outline: 2px solid #fff;
+        outline-offset: 2px;
+    }
 }

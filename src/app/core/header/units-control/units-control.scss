@@ -1,0 +1,118 @@
+@use 'mixins';
+@use 'variables' as vars;
+
+:host {
+    @include mixins.typography();
+
+    display: block;
+    position: relative;
+}
+
+.units-control__button {
+    display: flex;
+    width: 110px;
+    height: 40px;
+    padding: 0 10px;
+    background-color: vars.$primary-color;
+    justify-content: space-between;
+    align-items: center;
+
+    svg:last-of-type {
+        transition: transform vars.$transition-duration ease;
+    }
+
+    &.is-active svg:last-of-type {
+        transform: rotate(-180deg);
+    }
+}
+
+.units-control__dropdown {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 200px;
+    border: 2px solid vars.$border-color;
+    border-radius: vars.$border-radius;
+    background-color: vars.$primary-color;
+
+    // Hidden state
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    visibility: hidden;
+
+    transition:
+        opacity vars.$transition-duration ease,
+        transform vars.$transition-duration ease,
+        visibility 0ms linear vars.$transition-duration;
+
+    // Shown state
+    &.is-active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+        visibility: visible;
+
+        transition:
+            opacity vars.$transition-duration ease,
+            transform vars.$transition-duration ease,
+            visibility 0ms linear 0ms;
+    }
+}
+
+.units-toggle {
+    height: 35px;
+    background-color: vars.$primary-color;
+    text-align: left;
+    padding: 0 0 0 10px;
+}
+
+.unit-group {
+    border: none;
+    border-bottom: 1px solid #353551;
+    margin: 10px 0 0 0;
+    padding: 0 0 5px 0;
+
+    &:last-of-type {
+        border: none;
+        padding: 0;
+    }
+
+    &__label {
+        @include mixins.typography("DM Sans", #9697AB, 14px, 500);
+
+        padding: 0 10px;
+        margin: 5px 0;
+    }
+}
+
+.unit-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 35px;
+    padding: 0 10px;
+    margin-top: 5px;
+    border-radius: vars.$border-radius;
+    cursor: pointer;
+
+    &:hover,
+    &:has(input:focus-visible),
+    &.is-selected {
+        background-color: vars.$secondary-color;
+    }
+
+    svg {
+        display: none;
+        width: 14px;
+        height: 11px;
+    }
+
+    &.is-selected svg {
+        display: block;
+    }
+}
