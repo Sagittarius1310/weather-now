@@ -38,6 +38,47 @@
         left: 15px;
         pointer-events: none;
     }
+
+    &__suggestions {
+        position: absolute;
+        top: calc(100% + 10px);
+        z-index: 10;
+        left: 0;
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 10px;
+        background-color: vars.$primary-color;
+        border-radius: vars.$border-radius;
+    }
+}
+
+.suggestion {
+    @include mixins.typography();
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 40px;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: vars.$border-radius;
+    cursor: pointer;
+
+    &:hover {
+        background-color: vars.$secondary-color;
+        outline: 2px solid vars.$border-color;
+    }
+
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+
+    span {
+        &:not(:last-child)::after {
+            content: ',\00a0';
+        }
+    }
 }
 
 .search__button {

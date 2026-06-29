@@ -1,12 +1,38 @@
-<div class="search-field">
+<div class="search-field" #searchField>
     <input
         type="text"
         class="search-field__input"
         placeholder="Search for a place..."
         aria-label="Search for a place"
+        [formControl]="searchInput"
+        (focus)="openDropdown()"
+        [attr.aria-expanded]="isDropdownOpen() && locations().length > 0"
+        aria-controls="search-results"
+        aria-haspopup="listbox"
     />
     <svg class="search-field__icon" width="21" height="21" aria-hidden="true">
         <use href="images/icons.svg#icon-search"></use>
     </svg>
+
+    @if (isDropdownOpen()) {
+        @if (locations().length > 0) {
+            <ul id="search-results" class="search-field__suggestions" role="listbox" aria-label="Search suggestions">
+                @for (location of locations(); track location.id) {
+                    <li
+                        class="suggestion"
+                        role="option"
+                        tabindex="0"
+                        (click)="selectLocation(location)"
+                        (keydown.enter)="selectLocation(location)"
+                        (keydown.space)="selectLocation(location)"
+                    >
+                        <span>{{ location.name }}</span>
+                        <span>{{ location.admin1 }}</span>
+                        <span>{{ location.country }}</span>
+                    </li>
+                }
+            </ul>
+        }
+    }
 </div>
 <button type="button" class="search__button button">Search</button>
